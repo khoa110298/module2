@@ -15,6 +15,6 @@ public class SuDungToanTu {
         height = scanner.nextFloat();
         float area = width * height;
 
-        System.out.println("Area is: " + area)  
+        System.out.println("Area is: " + area);
     }
 }
