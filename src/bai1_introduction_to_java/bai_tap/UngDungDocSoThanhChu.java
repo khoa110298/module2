@@ -120,13 +120,10 @@ public class UngDungDocSoThanhChu {
         hangTram = hangTram*100;
         hangChuc = hangChuc - hangDonVi;
         int tu1den19 = hangChuc + hangDonVi;
-        if (number >= 120){
-            result = readHundred(hangTram) + readNumberTy(hangChuc) +" " + read1To10(hangDonVi);
+        if (number >= 100){
+            result = readHundred(hangTram) + read11To19(tu1den19)+ readNumberTy(hangChuc);
             System.out.println("chuyển ra là: " + result);
-        }else if (number >= 100){
-            result = readHundred(hangTram) + read11To19(tu1den19);
-            System.out.println("chuyển ra là: " + result);
-        }else if (number >= 20){
+        } else if (number >= 20){
             result =readNumberTy(hangChuc) +" " + read1To10(hangDonVi);
             System.out.println("chuyển ra là: " + result);
         } else if (number >=11){
