@@ -3,7 +3,7 @@ package bai3_mang_va_phuong_thuc_trong_java.bai_tap;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class XoaPhanTuKhoiMang {
+public class ThemPhanTuVaoMang {
     public static void main(String[] args) {
         int size;
         Scanner scanner = new Scanner(System.in);
@@ -24,16 +24,24 @@ public class XoaPhanTuKhoiMang {
         for (int j = 0; j < array.length; j++) {
             System.out.print(array[j] + "\t");
         }
-        System.out.print("nhập phần tử cần xóa: ");
+        int[] array1 = new int[size+1];
+        array1[size] = 0;
+        System.out.println();
+        System.out.print("nhập phần tử cần thêm vào mảng: ");
         int X = scanner.nextInt();
-        for (int i=0; i<array.length; i++){
-            if (array[i]==X){
-                for (int j=i; j<array.length-1; j++){
-                    array[j] = array[j+1];
+        System.out.print("nhập vị trí cần thêm: ");
+        int Y = scanner.nextInt();
+        for (int i=0; i<=size; i++){
+            array1[i] = array[i];
+            if (Y==i){
+                array1[i]=X;
+                for (int j=i; j<size;j++){
+                    array1[j+1]=array[j];
                 }
-                array[array.length-1]=0;
+                break;
             }
         }
-        System.out.print("new array: " + Arrays.toString(array));
+        System.out.println();
+        System.out.print("new array: " + Arrays.toString(array1));
     }
 }
