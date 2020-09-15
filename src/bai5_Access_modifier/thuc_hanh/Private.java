@@ -1,5 +1,6 @@
 package bai5_Access_modifier.thuc_hanh;
 
+
 public class Private {
 //    private int data=40;
 //

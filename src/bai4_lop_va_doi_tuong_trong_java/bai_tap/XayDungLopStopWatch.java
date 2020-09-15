@@ -38,7 +38,7 @@ public class XayDungLopStopWatch {
         sapXep(array);
 
         stopWatch.stop();
-        System.out.println(stopWatch.getElapsedTime());
+        System.out.println(stopWatch.getDisPlay());
     }
 
 }
