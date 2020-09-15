@@ -6,7 +6,7 @@ public class Private {
 //
 //    private void msg(){System.out.println("Hello java");}
 //}
-//public class Simple{
+//    public class Simple{
 //
 //    public static void main(String args[]){
 //
@@ -16,6 +16,6 @@ public class Private {
 //
 //        obj.msg();//Compile Time Error
 //
-//    }
+//     }
 }
 
