@@ -1,8 +1,8 @@
 package bai5_Access_modifier.bai_tap;
 
 public class AccessModifier {
-     private double radius = 1.0;
-     private String color = "red";
+     public double radius = 1.0;
+     public String color = "red";
      public AccessModifier(){};
      public AccessModifier(double radius){
          this.radius = radius;
