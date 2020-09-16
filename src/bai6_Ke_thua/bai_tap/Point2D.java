@@ -3,8 +3,8 @@ package bai6_Ke_thua.bai_tap;
 import java.util.Arrays;
 
 public class Point2D {
-    private float x;
-    private float y;
+     float x;
+    float y;
 
     public Point2D(float x, float y){
         this.x = x;
@@ -29,14 +29,14 @@ public class Point2D {
 
     public String getXY() {
         float[] array = new float[2];
-        array[0]=x;
-        array[1]=y;
+        array[0]=getX();
+        array[1]=getY();
         return Arrays.toString(array);
     }
 
     public void setXY(float x,float y) {
-        this.x = x;
-        this.y = y;
+        this.x = getX();
+        this.y = getY();
     }
 
     @Override
