@@ -1,6 +1,6 @@
 package bai7_Abstract_Class_va_Interface.bai_tap;
 
-public class Square extends Rectangle {
+public class Square extends Rectangle implements Colorable, Resizeable {
     public Square() {
     }
 
@@ -37,5 +37,19 @@ public class Square extends Rectangle {
                 + getSide()
                 + ", which is a subclass of "
                 + super.toString();
+    }
+
+    @Override
+    public void howToColor() {
+        System.out.println("Color all four sides");
+    }
+
+}
+class ResizeableSquare{
+    public static void main(String[] args) {
+        Square square = new Square(10);
+        System.out.println("diện tích trước khi thay đổi là: " + square.getArea());
+        square.resize(Math.random()*100);
+        System.out.println("diện tích sau khi thay đổi là: " + square.getArea());
     }
 }

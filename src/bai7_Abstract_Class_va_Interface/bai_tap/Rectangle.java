@@ -1,6 +1,6 @@
 package bai7_Abstract_Class_va_Interface.bai_tap;
 
-public class Rectangle extends Shape {
+public class Rectangle extends Shape implements Resizeable {
     private double width = 1.0;
     private double length = 1.0;
 
@@ -50,5 +50,19 @@ public class Rectangle extends Shape {
 //                + getLength()
 //                + ", which is a subclass of "
                return super.toString();
+    }
+
+    @Override
+    public void resize(double percent) {
+        this.width += this.width*percent/100;
+        this.length +=this.length*percent/100;
+    }
+}
+class ResizeableRectangle {
+    public static void main(String[] args) {
+        Rectangle rectangle = new Rectangle(4,6);
+        System.out.println("diện tích trước khi thay đổi là: " + rectangle.getArea());
+        rectangle.resize(Math.random()*100);
+        System.out.println("diện tích sau khi thay đổi là: " + rectangle.getArea());
     }
 }

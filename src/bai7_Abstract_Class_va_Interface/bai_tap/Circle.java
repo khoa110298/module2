@@ -1,6 +1,6 @@
 package bai7_Abstract_Class_va_Interface.bai_tap;
 
-public class Circle extends Shape {
+public class Circle extends Shape implements Colorable, Resizeable{
     private double radius = 1.0;
 
     public Circle() {
@@ -37,5 +37,23 @@ public class Circle extends Shape {
                 + getRadius()
                 + ", which is a subclass of "
                 + super.toString();
+    }
+
+    @Override
+    public void howToColor() {
+        System.out.println("Color all four sides");
+    }
+
+    @Override
+    public void resize(double percent) {
+        this.radius = this.radius + this.radius * percent / 100;
+    }
+}
+class ResizeableCircle{
+    public static void main(String[] args) {
+        Circle circle = new Circle(2);
+        System.out.println("diện tích trước khi tăng bán kính là: " + circle.getArea());
+        circle.resize(Math.random() * 100);
+        System.out.println("diện tích sau khi tăng bán kính là: " + circle.getArea());
     }
 }

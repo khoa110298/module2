@@ -1,17 +1,23 @@
 package bai7_Abstract_Class_va_Interface.bai_tap;
 
-public class ColorableSquare extends Square implements Colorable {
-
-    @Override
-    public String howToColor() {
-        return "Color all four sides ";
-    }
-}
-class ColorableSquareTest {
+public class ColorableSquare {
     public static void main(String[] args) {
-        ColorableSquare colorableSquare = new ColorableSquare();
-        System.out.println(colorableSquare.toString());
-        System.out.println(colorableSquare.getArea());
-        System.out.println(colorableSquare.howToColor());
+        Shape[] shapes = new Shape[4];
+        shapes[0] = new Square(5);
+        shapes[1] = new Circle(7);
+        shapes[2] = new Rectangle(4, 2); //height
+        shapes[3] = new Square(3);
+
+        if (shapes[2] instanceof Colorable) {
+            Circle circle = (Circle) shapes[1];
+            System.out.println(circle.toString());
+            System.out.println(circle.getArea());
+            circle.howToColor();
+
+            Square square = (Square) shapes[0];
+            System.out.println(square.toString());
+            System.out.println(square.getArea());
+            square.howToColor();
+        }
     }
 }
