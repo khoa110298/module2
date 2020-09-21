@@ -1,62 +1,58 @@
 package bai8_Clean_Code_va_Refactoring.thuc_hanh;
 
 public class TennisGame {
-    public static String getScore(String player1Name, String player2Name, int m_score1, int m_score2) {
-        String score = "";
-        int tempScore=0;
-        if (m_score1==m_score2)
-        {
-            switch (m_score1)
-            {
-                case 0:
-                    score = "Love-All";
-                    break;
-                case 1:
-                    score = "Fifteen-All";
-                    break;
-                case 2:
-                    score = "Thirty-All";
-                    break;
-                case 3:
-                    score = "Forty-All";
-                    break;
-                default:
-                    score = "Deuce";
-                    break;
-
-            }
+    public static final String DASH = "-";
+    public static final int ZERO = 0;
+    public static final int FIFTEEN = 1;
+    public static final int THIRTY = 2;
+    public static final int FORTY = 3;
+    public static String getScore(String player1Name, String player2Name, int player1Score, int player2Score) {
+        boolean isEqual = player1Score == player2Score;
+        boolean isGreaterThan4 = player1Score >= 4 || player2Score >= 4;
+        if (isEqual) return getEqualScore(player1Score);
+        if (isGreaterThan4) return getAdvantageScore(player1Score, player2Score);
+        return getDifferentScore(player1Score, player2Score);
+    }
+    public static String getEqualScore(int playerScore) {
+        switch (playerScore) {
+            case ZERO:
+                return "Love-All";
+            case FIFTEEN:
+                return "Fifteen-All";
+            case THIRTY:
+                return "Thirty-All";
+            case FORTY:
+                return "Forty-All";
+            default:
+                return "Deuce";
         }
-        else if (m_score1>=4 || m_score2>=4)
-        {
-            int minusResult = m_score1-m_score2;
-            if (minusResult==1) score ="Advantage player1";
-            else if (minusResult ==-1) score ="Advantage player2";
-            else if (minusResult>=2) score = "Win for player1";
-            else score ="Win for player2";
-        }
-        else
-        {
-            for (int i=1; i<3; i++)
-            {
-                if (i==1) tempScore = m_score1;
-                else { score+="-"; tempScore = m_score2;}
-                switch(tempScore)
-                {
-                    case 0:
-                        score+="Love";
-                        break;
-                    case 1:
-                        score+="Fifteen";
-                        break;
-                    case 2:
-                        score+="Thirty";
-                        break;
-                    case 3:
-                        score+="Forty";
-                        break;
-                }
-            }
-        }
+    }
+    public static String getAdvantageScore(int player1Score, int player2Score) {
+        int minusResult = player1Score - player2Score;
+        boolean player1Advantage = minusResult == 1;
+        boolean player2Advantage = minusResult == -1;
+        boolean player1Win = minusResult >= 2;
+        if (player1Advantage) return "Advantage player1";
+        if (player2Advantage) return "Advantage player2";
+        if (player1Win) return "Win for player1";
+        return "Win for player2";
+    }
+    public static String getDifferentScore(int player1Score, int player2Score) {
+        String score = getScoreLabel(player1Score);
+        score += DASH;
+        score += getScoreLabel(player2Score);
         return score;
+    }
+    public static String getScoreLabel(int playerScore) {
+        switch (playerScore) {
+            default:
+                return "Love";
+            case FIFTEEN:
+                return "Fifteen";
+            case THIRTY:
+                return "Thirty";
+            case FORTY:
+                return "Forty";
+        }
     }
 }
