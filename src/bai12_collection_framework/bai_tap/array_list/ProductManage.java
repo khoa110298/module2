@@ -2,7 +2,6 @@ package bai12_collection_framework.bai_tap.array_list;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Scanner;
 
 public class ProductManage {
@@ -48,6 +47,7 @@ public class ProductManage {
                 DeCrease();
                 break;
             }
+            default:
         }
     }
 
