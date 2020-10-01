@@ -19,6 +19,7 @@ public class InsertSort {
             System.out.println(Arrays.toString(list));
         }
     }
+
     public static void main(String[] args) {
         int[] array = {4, 2, 9, 3, 11, 1};
         System.out.println(Arrays.toString(array));

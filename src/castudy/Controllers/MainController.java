@@ -21,6 +21,10 @@ public class MainController {
                 AddNewServices();
                 break;
             }
+            case 2: {
+                showServices();
+                break;
+            }
         }
     }
 
@@ -33,10 +37,29 @@ public class MainController {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("chọn dịch vụ cần thêm: ");
-        int x = Integer.parseInt(scanner.nextLine());
+        int d = Integer.parseInt(scanner.nextLine());
 
-        switch (x) {
-            case 1: 
+        switch (d) {
+            case 1:
         }
     }
+
+    public static void showServices() {
+        System.out.println("1.Show all Villa" + "\n"
+                + "2.Show all House" + "\n"
+                + "3.Show all Room" + "\n"
+                + "4.Show All Name Villa Not Duplicate" + "\n"
+                + "5.Show All Name House Not Duplicate" + "\n"
+                + "6.Show All Name Name Not Duplicate" + "\n"
+                + "7.Back to menu" + "\n"
+                + "8.Exit");
+
+        Scanner scanner = new Scanner(System.in);
+        int d =Integer.parseInt(scanner.nextLine());
+        switch (d){
+            case 1:
+        }
+
+    }
+
 }
