@@ -82,7 +82,7 @@ public class BinaryFile {
     public static void disPlay() {
         FileInputStream fis;
         ObjectInputStream ois = null;
-        List<Product> productList = null;
+        List<Product> productList;
 
         try {
             fis = new FileInputStream(FileManage);
