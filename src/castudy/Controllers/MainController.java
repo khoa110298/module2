@@ -1,13 +1,7 @@
 package castudy.Controllers;
 
-import castudy.Commons.BirthdayException;
-import castudy.Commons.GenderException;
-import castudy.Commons.NameException;
-import castudy.Commons.Validator;
-import castudy.Modles.House;
-import castudy.Modles.Room;
-import castudy.Modles.Services;
-import castudy.Modles.Villa;
+import castudy.Commons.*;
+import castudy.Modles.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -46,6 +40,10 @@ public class MainController {
             }
             case 3: {
                 addNewCustomer();
+                break;
+            }
+            case 4: {
+                showInformationCustomers();
                 break;
             }
 
@@ -463,7 +461,7 @@ public class MainController {
         String email;
         String typeOfCustomer;
         String address;
-        Services services;
+        Services service = null;
 
         Scanner scanner = new Scanner(System.in);
         Validator validator = new Validator();
@@ -500,9 +498,79 @@ public class MainController {
                 e.printStackTrace();
             }
         }
-        while (true){
-            System.out.print("");
+        while (true) {
+            System.out.print("nhập chứng minh nhân dân: ");
+            cmnd = scanner.nextLine();
+            try {
+                if (validator.isValiCMND(cmnd)) {
+                    break;
+                }
+            } catch (IdCardException e) {
+                e.printStackTrace();
+            }
         }
+        System.out.print("nhập số điện thoại: ");
+        telephoneNumber = scanner.nextLine();
+
+        while (true) {
+            System.out.print("nhập email: ");
+            email = scanner.nextLine();
+            try {
+                if (validator.isValiEmaiCustomer(email)) {
+                    break;
+                }
+            } catch (EmailException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.print("nhập loại khách hàng: ");
+        typeOfCustomer = scanner.nextLine();
+        System.out.print("nhập địa chỉ: ");
+        address = scanner.nextLine();
+
+        Customer customer = new Customer(nameCustomer, dayOfBirth, gender, cmnd, telephoneNumber, email, typeOfCustomer, address, service);
+        String line = customer.getNameCustomer() + COMNA + customer.getDayOfBirth() + COMNA + customer.getGender() + COMNA +
+                customer.getCmnd() + COMNA + customer.getTelephoneNumber() + COMNA + customer.getEmail() + COMNA +
+                customer.getTypeOfCustomer() + COMNA + customer.getAddress() + COMNA + customer.getServices();
+
+        try {
+            FileWriter fileWriter = new FileWriter(FILE_CUSTOMER, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(line);
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        displayMainMenu();
+
+    }
+
+    public static void showInformationCustomers() {
+        List<Customer> customerList = new ArrayList<>();
+
+        try {
+            FileReader fileReader = new FileReader(FILE_CUSTOMER);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+            String[] temp;
+            Customer customer;
+            while ((line = bufferedReader.readLine()) != null) {
+                temp = line.split(COMNA);
+                customer = new Customer(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], temp[7], null);
+                customerList.add(customer);
+            }
+            for (Customer customer1 : customerList) {
+                customer1.showInfor();
+            }
+            bufferedReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        displayMainMenu();
+
     }
 
     public static void main(String[] args) {

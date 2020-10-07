@@ -1,6 +1,6 @@
 package castudy.Modles;
 
-public class Customer {
+public class Customer implements Comparable<Customer>{
     private String nameCustomer;
     private String dayOfBirth;
     private String gender;
@@ -112,5 +112,10 @@ public class Customer {
 
     public void showInfor(){
         System.out.println(this.toString());
+    }
+
+    @Override
+    public int compareTo(Customer customer) {
+        return 0;
     }
 }

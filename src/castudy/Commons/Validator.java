@@ -1,10 +1,10 @@
 package castudy.Commons;
 
-        import java.util.Arrays;
-        import java.util.Calendar;
-        import java.util.Spliterators;
-        import java.util.regex.Matcher;
-        import java.util.regex.Pattern;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Spliterators;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Validator {
 
@@ -12,7 +12,7 @@ public class Validator {
     public static final String SERVICES_NAME_REGEX = "^[A-Z]{1}[a-z]*$";
     public static final String SERVICES_RENTAL = "^([0][1-9]|[1-2][0-9]|[3][0-1])[/]([0][1-9]|[1][0-2])[/]\\d{4}$";
     public static final String CUSTOMER_NAME = "^([A-Z][a-z]*[\\s])*[A-Z][a-z]*$";
-    public static final String CUSTOMER_EMAIL = "^\\w{3,}@[a-zA-Z]{3,5}\\.[a-zA-Z]{2,3}$\n";
+    public static final String CUSTOMER_EMAIL = "^\\w{3,}@[a-zA-Z]{3,5}\\.[a-zA-Z]{2,3}$";
     public static final String CUSTOMER_CMND = "^(\\d{3}[\\s]){2}\\d{3}$";
     //    public static final String CUSTOMER_DAY_OF_BIRTH = "^((0[1-9])|([1-2][0-9])|(3[0-1]))\\/(([0][1-9])|1[0-2])\\/(19[0-9]{2}|200[0-2])$";
     public static final String CUSTOMER_DAY_OF_BIRTH = "^([0][1-9]|[1-2][0-9]|[3][0-1])[/]([0][1-9]|[1][0-2])[/]\\d{4}$";
@@ -144,7 +144,7 @@ public class Validator {
                 check = false;
                 throw new BirthdayException();
             }
-        }else {
+        } else {
             throw new BirthdayException();
         }
         return check;
