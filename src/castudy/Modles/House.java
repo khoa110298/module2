@@ -4,13 +4,19 @@ public class House extends Services {
 
     private String standardRoom;
     private String convenient;
-    private int numberFloors;
+    private String numberFloors;
 
     public House() {
     }
 
-    public House(String nameServices, Double area, Double cost, Double maxNumber, String rentaltype, String standardRoom, String convenient, int numberFloors) {
-        super(nameServices, area, cost, maxNumber, rentaltype);
+    public House(String standardRoom, String convenient, String numberFloors) {
+        this.standardRoom = standardRoom;
+        this.convenient = convenient;
+        this.numberFloors = numberFloors;
+    }
+
+    public House(String id, String nameServices, String area, String cost, String maxNumber, String rentaltype, String standardRoom, String convenient, String numberFloors) {
+        super(id, nameServices, area, cost, maxNumber, rentaltype);
         this.standardRoom = standardRoom;
         this.convenient = convenient;
         this.numberFloors = numberFloors;
@@ -32,27 +38,26 @@ public class House extends Services {
         this.convenient = convenient;
     }
 
-    public int getNumberFloors() {
+    public String getNumberFloors() {
         return numberFloors;
     }
 
-    public void setNumberFloors(int numberFloors) {
+    public void setNumberFloors(String numberFloors) {
         this.numberFloors = numberFloors;
     }
 
     @Override
     public String toString() {
-        return "House{" +
+        return "House{" + super.toString()+
                 "standardRoom='" + standardRoom + '\'' +
                 ", convenient='" + convenient + '\'' +
                 ", numberFloors=" + numberFloors +
-                '}'+ super.toString();
+                '}';
     }
 
     @Override
     public void showInfor() {
         System.out.println(this.toString());
-
     }
 
 }

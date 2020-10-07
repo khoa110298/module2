@@ -1,21 +1,31 @@
 package castudy.Modles;
 
 public abstract class Services {
+    private String id;
     private String nameServices;
-    private Double area;
-    private Double  cost;
-    private Double maxNumber;
+    private String area;
+    private String cost;
+    private String maxNumber;
     private String rentaltype;
 
     public Services() {
     }
 
-    public Services(String nameServices, Double area, Double cost, Double maxNumber, String rentaltype) {
+    public Services(String id, String nameServices, String area, String cost, String maxNumber, String rentaltype) {
+        this.id = id;
         this.nameServices = nameServices;
         this.area = area;
         this.cost = cost;
         this.maxNumber = maxNumber;
         this.rentaltype = rentaltype;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNameServices() {
@@ -26,27 +36,27 @@ public abstract class Services {
         this.nameServices = nameServices;
     }
 
-    public Double getArea() {
+    public String getArea() {
         return area;
     }
 
-    public void setArea(Double area) {
+    public void setArea(String area) {
         this.area = area;
     }
 
-    public Double getCost() {
+    public String getCost() {
         return cost;
     }
 
-    public void setCost(Double cost) {
+    public void setCost(String cost) {
         this.cost = cost;
     }
 
-    public Double getMaxNumber() {
+    public String getMaxNumber() {
         return maxNumber;
     }
 
-    public void setMaxNumber(Double maxNumber) {
+    public void setMaxNumber(String maxNumber) {
         this.maxNumber = maxNumber;
     }
 
@@ -62,12 +72,12 @@ public abstract class Services {
 
     @Override
     public String toString() {
-        return "Services{" +
-                "nameServices='" + nameServices + '\'' +
+        return "id='" + id + '\'' +
+                ", nameServices='" + nameServices + '\'' +
                 ", area=" + area +
                 ", cost=" + cost +
                 ", maxNumber=" + maxNumber +
-                ", rentaltype='" + rentaltype + '\'' +
-                '}';
+                ", rentaltype='" + rentaltype + '\''
+                ;
     }
 }

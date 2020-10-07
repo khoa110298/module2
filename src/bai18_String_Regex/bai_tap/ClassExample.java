@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ClassExample {
-    private static final String CLASS_REGEX = "^[CAP]\\d{4}[G|H|I|K|L|M]$";//"^[A|C|P]\\d{4}[G|H|I|K|L|M]$";
+    private static final String CLASS_REGEX = "^[C|A|P]\\d{4}[G|H|I|K|L|M]$";//"^[A|C|P]\\d{4}[G|H|I|K|L|M]$";
 
     public ClassExample() {
 

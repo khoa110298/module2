@@ -3,17 +3,24 @@ package castudy.Modles;
 public class Villa extends Services{
     private String standardRoom;
     private String convenient;
-    private Double area;
-    private int numberFloors;
+    private String lakeArea;
+    private String numberFloors;
 
     public Villa() {
     }
 
-    public Villa(String nameServices, Double area, Double cost, Double maxNumber, String rentaltype, String standardRoom, String convenient, Double area1, int numberFloors) {
-        super(nameServices, area, cost, maxNumber, rentaltype);
+    public Villa(String standardRoom, String convenient, String area, String numberFloors) {
         this.standardRoom = standardRoom;
         this.convenient = convenient;
-        this.area = area1;
+        this.lakeArea = area;
+        this.numberFloors = numberFloors;
+    }
+
+    public Villa(String id, String nameServices, String area, String cost, String maxNumber, String rentaltype, String standardRoom, String convenient, String area1, String numberFloors) {
+        super(id, nameServices, area, cost, maxNumber, rentaltype);
+        this.standardRoom = standardRoom;
+        this.convenient = convenient;
+        this.lakeArea = area1;
         this.numberFloors = numberFloors;
     }
 
@@ -33,32 +40,30 @@ public class Villa extends Services{
         this.convenient = convenient;
     }
 
-    @Override
-    public Double getArea() {
-        return area;
+    public String getLakeArea() {
+        return lakeArea;
     }
 
-    @Override
-    public void setArea(Double area) {
-        this.area = area;
+    public void setLakeArea(String lakeArea) {
+        this.lakeArea = lakeArea;
     }
 
-    public int getNumberFloors() {
+    public String getNumberFloors() {
         return numberFloors;
     }
 
-    public void setNumberFloors(int numberFloors) {
+    public void setNumberFloors(String numberFloors) {
         this.numberFloors = numberFloors;
     }
 
     @Override
     public String toString() {
-        return "Villa{" +
+        return "Villa{" + super.toString() +
                 "standardRoom='" + standardRoom + '\'' +
                 ", convenient='" + convenient + '\'' +
-                ", area=" + area +
+                ", area='" + lakeArea + '\'' +
                 ", numberFloors=" + numberFloors +
-                '}'+super.toString();
+                '}';
     }
 
     @Override

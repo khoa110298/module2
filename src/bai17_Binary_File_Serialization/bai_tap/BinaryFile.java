@@ -143,8 +143,6 @@ public class BinaryFile {
                 e.printStackTrace();
             }
         }
-
-
         if (check) {
             System.out.println(productList.get(n).toString());
         } else {
