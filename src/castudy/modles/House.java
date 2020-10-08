@@ -1,4 +1,4 @@
-package castudy.Modles;
+package castudy.modles;
 
 public class House extends Services {
 

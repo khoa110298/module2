@@ -1,4 +1,4 @@
-package castudy.Modles;
+package castudy.modles;
 
 public class Villa extends Services{
     private String standardRoom;

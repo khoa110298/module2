@@ -1,4 +1,4 @@
-package castudy.Commons;
+package castudy.commons;
 
 public class IdCardException extends Exception {
     public IdCardException(){

@@ -1,4 +1,4 @@
-package castudy.Modles;
+package castudy.modles;
 
 public abstract class Services {
     private String id;

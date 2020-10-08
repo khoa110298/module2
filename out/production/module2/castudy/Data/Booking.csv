@@ -1,0 +1,1 @@
+Customer{nameCustomer='Anh Tien', dayOfBirth='23/12/1993', gender='male', cmnd='987 765 122', telephoneNumber='83798273190', email='anhtien@gamil.com', typeOfCustomer='Vip', address='đà nẵng', services=Villa{id='SVVL-1234', nameServices='Villa', area=50, cost=10000, maxNumber=10, rentaltype='Vip'standardRoom='Vip', convenient='Vip', area='35', numberFloors=5}}

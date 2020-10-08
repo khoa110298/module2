@@ -1,4 +1,4 @@
-package castudy.Commons;
+package castudy.commons;
 
 public class BirthdayException extends Exception{
     public BirthdayException(){

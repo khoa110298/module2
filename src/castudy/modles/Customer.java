@@ -1,4 +1,4 @@
-package castudy.Modles;
+package castudy.modles;
 
 public class Customer implements Comparable<Customer>{
     private String nameCustomer;
@@ -115,7 +115,13 @@ public class Customer implements Comparable<Customer>{
     }
 
     @Override
-    public int compareTo(Customer customer) {
-        return 0;
+    public int compareTo(Customer name) {
+        int swap = this.nameCustomer.compareTo(name.nameCustomer);
+        if (swap == 0){
+            int yearCustomer1 = Integer.parseInt(this.dayOfBirth.split("/")[2]);
+            int yearCustomer2 = Integer.parseInt(name.dayOfBirth.split("/")[2]);
+            swap = yearCustomer1 - yearCustomer2;
+        }
+        return swap;
     }
 }
