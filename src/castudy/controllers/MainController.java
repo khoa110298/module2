@@ -13,6 +13,7 @@ public class MainController {
     public static final String FILE_HOUSE = "D:\\CodeGym\\CO320G1-NguyenKhoa\\module2\\src\\castudy\\Data\\House.csv";
     public static final String FILE_CUSTOMER = "D:\\CodeGym\\CO320G1-NguyenKhoa\\module2\\src\\castudy\\Data\\Customer.csv";
     public static final String FILE_BOOKING = "D:\\CodeGym\\CO320G1-NguyenKhoa\\module2\\src\\castudy\\Data\\Booking.csv";
+    public static final String FILE_EMPLOYEE = "D:\\CodeGym\\CO320G1-NguyenKhoa\\module2\\src\\castudy\\data\\Employee.csv";
     public static final String COMNA = ",";
 
     public static void displayMainMenu() {
@@ -30,7 +31,7 @@ public class MainController {
 
         switch (d) {
             case 1: {
-                AddNewServices();
+                addNewServices();
                 displayMainMenu();
                 break;
             }
@@ -54,11 +55,47 @@ public class MainController {
                 displayMainMenu();
                 break;
             }
+            case 6: {
+                showInformationOfEmployee();
+                displayMainMenu();
+                break;
+            }
+            case 7: {
+                System.exit(0);
+            }
 
         }
     }
 
-    public static void AddNewServices() {
+    public static void showInformationOfEmployee() {
+
+        Map<Integer, Employee> customerMap = new TreeMap<>();
+
+        try {
+            FileReader fileReader = new FileReader(FILE_EMPLOYEE);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+            String[] temp;
+            Employee employee;
+            while ((line = bufferedReader.readLine()) != null) {
+                temp = line.split(COMNA);
+                employee = new Employee(temp[0], temp[1], temp[2], temp[3]);
+                customerMap.put(Integer.parseInt(employee.getIdEmployee()), employee);
+            }
+            for (Map.Entry<Integer, Employee> entry : customerMap.entrySet()) {
+                System.out.println(entry.getKey() + ":" + entry.getValue());
+            }
+
+            bufferedReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void addNewServices() {
         System.out.println("1.Add New Villa" + "\n"
                 + "2.Add New House" + "\n"
                 + "3.Add New Room" + "\n"
@@ -268,7 +305,7 @@ public class MainController {
                 + house.getNumberFloors();
 
         try {
-            FileWriter fileWriter = new FileWriter(FILE_ROOM, true);
+            FileWriter fileWriter = new FileWriter(FILE_HOUSE, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(line);
             bufferedWriter.newLine();
@@ -286,7 +323,10 @@ public class MainController {
         String cost;
         String numberPeople;
         String rental;
-        String free;
+        String nameFreeService;
+        String unit;
+        String price;
+        FreeService free;
 
         Scanner scanner = new Scanner(System.in);
         Validator validator = new Validator();
@@ -331,18 +371,33 @@ public class MainController {
                 break;
         }
         while (true) {
-            System.out.print("Nhâp dịch vụ miễn phí đi kèm: ");
-            free = scanner.nextLine();
-            if (validator.isValiService(free)) {
+            System.out.print("nhâp tên dịch vụ đi kèm: ");
+            nameFreeService = scanner.nextLine();
+            if (validator.isValiService(nameFreeService)) {
                 break;
             }
         }
+        System.out.print("nhập đơn vị: ");
+        unit = scanner.nextLine();
+        System.out.print("nhập giá tiền: ");
+        price = scanner.nextLine();
+        free = new FreeService(nameFreeService, unit, price);
+
+
         Room room = new Room(id, name, area, cost, numberPeople, rental, free);
+//            System.out.print("Nhâp dịch vụ miễn phí đi kèm: ");
+//            free = scanner.nextLine();
+//            if (validator.isValiService(free)) {
+//                break;
+//            }
+//        }
+//        Room room = new Room(id, name, area, cost, numberPeople, rental, free);
         String line = room.getId() + COMNA + room.getNameServices() + COMNA + room.getArea() + COMNA + room.getCost() + COMNA
-                + room.getMaxNumber() + COMNA + room.getRentaltype() + COMNA + room.getFree();
+                + room.getMaxNumber() + COMNA + room.getRentaltype() + COMNA + room.getFreeService().getNameFreeService() + COMNA
+                + room.getFreeService().getUnit() + COMNA + room.getFreeService().getPrice();
 
         try {
-            FileWriter fileWriter = new FileWriter(FILE_HOUSE, true);
+            FileWriter fileWriter = new FileWriter(FILE_ROOM, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(line);
             bufferedWriter.newLine();
@@ -385,22 +440,22 @@ public class MainController {
                 showAllNameHouseNotDuplicate();
                 break;
             }
-            case 6:{
+            case 6: {
                 showAllNameRoomNotDuplicate();
                 break;
             }
-            case 7:{
+            case 7: {
                 displayMainMenu();
                 break;
             }
-            case 8:{
-                System.exit(0)  ;
+            case 8: {
+                System.exit(0);
             }
         }
 
     }
 
-    public static void showAllNameRoomNotDuplicate(){
+    public static void showAllNameRoomNotDuplicate() {
         List<Room> roomList = new ArrayList<>();
 
         try {
@@ -409,16 +464,16 @@ public class MainController {
             String line;
             String[] temp;
             Room room;
-            while ((line = bufferedReader.readLine())!=null){
+            while ((line = bufferedReader.readLine()) != null) {
                 temp = line.split(COMNA);
-                room = new Room(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6]);
+                room = new Room(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], new FreeService(temp[6],temp[7],temp[8]));
                 roomList.add(room);
             }
             Set<String> roomTreeSet = new TreeSet<>();
-            for (Room room1 : roomList){
+            for (Room room1 : roomList) {
                 roomTreeSet.add(room1.getNameServices());
             }
-            for (String string : roomTreeSet){
+            for (String string : roomTreeSet) {
                 System.out.println(string);
             }
             bufferedReader.close();
@@ -549,7 +604,7 @@ public class MainController {
             Room room;
             while ((line = bufferedReader.readLine()) != null) {
                 temp = line.split(COMNA);
-                room = new Room(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6]);
+                room = new Room(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], new FreeService(temp[6],temp[7],temp[8]));
                 roomList.add(room);
             }
             for (Room room1 : roomList) {
@@ -817,7 +872,7 @@ public class MainController {
                     Room room;
                     while ((line = bufferedReader.readLine()) != null) {
                         temp = line.split(COMNA);
-                        room = new Room(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6]);
+                        room = new Room(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], new FreeService(temp[6],temp[7],temp[8]));
                         roomList.add(room);
                     }
                     for (int i = 0; i < roomList.size(); i++) {

@@ -2,34 +2,35 @@ package castudy.modles;
 
 public class Room extends Services{
 
-    private String free;
+    private FreeService freeService;
 
     public Room() {
     }
 
-    public Room(String free) {
-        this.free = free;
+    public Room(FreeService freeService) {
+        this.freeService = freeService;
     }
 
-    public Room(String id, String nameServices, String area, String cost, String maxNumber, String rentaltype, String free) {
+    public Room(String id, String nameServices, String area, String cost, String maxNumber, String rentaltype, FreeService freeService) {
         super(id, nameServices, area, cost, maxNumber, rentaltype);
-        this.free = free;
+        this.freeService = freeService;
     }
 
-    public String getFree() {
-        return free;
+    public FreeService getFreeService() {
+        return freeService;
     }
 
-    public void setFree(String free) {
-        this.free = free;
+    public void setFreeService(FreeService freeService) {
+        this.freeService = freeService;
     }
 
     @Override
     public String toString() {
-        return "Room{" +super.toString()+
-                "free='" + free + '\'' +
+        return "Room{" + super.toString() +
+                " freeService=" + freeService +
                 '}';
     }
+
     @Override
     public void showInfor() {
         System.out.println(this.toString());
