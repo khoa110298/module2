@@ -14,6 +14,7 @@ public class MainController {
     public static final String FILE_CUSTOMER = "D:\\CodeGym\\CO320G1-NguyenKhoa\\module2\\src\\castudy\\Data\\Customer.csv";
     public static final String FILE_BOOKING = "D:\\CodeGym\\CO320G1-NguyenKhoa\\module2\\src\\castudy\\Data\\Booking.csv";
     public static final String FILE_EMPLOYEE = "D:\\CodeGym\\CO320G1-NguyenKhoa\\module2\\src\\castudy\\data\\Employee.csv";
+    public static final String FILE_EMPLOYEEPROFILE = "D:\\CodeGym\\CO320G1-NguyenKhoa\\module2\\src\\castudy\\data\\EmployeeProfile.csv";
     public static final String COMNA = ",";
 
     public static void displayMainMenu() {
@@ -23,7 +24,9 @@ public class MainController {
                 + "4.Show Information of Customer" + "\n"
                 + "5.Add New Booking" + "\n"
                 + "6.Show Information of Employee" + "\n"
-                + "7.Exit");
+                + "7.Show Custmer Cinema 4D" + "\n"
+                + "8.Search Employee Profile" + "\n"
+                + "9.Exit");
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("nhập sự lựa chọn của bạn: ");
@@ -61,10 +64,139 @@ public class MainController {
                 break;
             }
             case 7: {
+                showCustomerCinema4D();
+                displayMainMenu();
+                break;
+            }
+            case 8: {
+                searchEmployeeProfile();
+                displayMainMenu();
+                break;
+            }
+            case 9: {
                 System.exit(0);
             }
 
         }
+    }
+
+    public static void searchEmployeeProfile() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("1.add New Employee Profile" + "\n" + "2.show Employee Profile");
+        System.out.print("nhập sự lựa chon của bạn: ");
+        int d = Integer.parseInt(scanner.nextLine());
+
+        switch (d) {
+            case 1: {
+                addNewEmployeeProfile();
+                break;
+            }
+            case 2: {
+                showEmployeeProfile();
+                break;
+            }
+        }
+
+    }
+
+    public static void addNewEmployeeProfile() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("nhập id nhân viên: ");
+        String idEmployee = scanner.nextLine();
+        System.out.print("nhập tên nhân viên: ");
+        String nameEmployee = scanner.nextLine();
+        System.out.print("nhập tuổi nhân viên: ");
+        String ageEmployee = scanner.nextLine();
+        System.out.print("nhập địa chỉ nhân viên: ");
+        String addressEmployee = scanner.nextLine();
+
+        EmployeeProfile employeeProfile = new EmployeeProfile(new Employee(idEmployee, nameEmployee, ageEmployee, addressEmployee));
+        String line = employeeProfile.getEmployee().getIdEmployee() + COMNA + employeeProfile.getEmployee().getNameEmployee() + COMNA +
+                employeeProfile.getEmployee().getAge() + COMNA + employeeProfile.getEmployee().getAddressEmployee();
+
+        try {
+            FileWriter fileWriter = new FileWriter(FILE_EMPLOYEEPROFILE, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(line);
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void showEmployeeProfile() {
+        Stack<Employee> employeeStack = new Stack<>();
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            FileReader fileReader = new FileReader(FILE_EMPLOYEEPROFILE);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+            String[] temp;
+            Employee employee;
+            while ((line = bufferedReader.readLine()) != null) {
+                temp = line.split(COMNA);
+                employee = new Employee(temp[0], temp[1], temp[2], temp[3]);
+                employeeStack.add(employee);
+            }
+
+            System.out.print("nhâp id tìm kiếm: ");
+            int id = Integer.parseInt(scanner.nextLine());
+            boolean check = false;
+            Employee employee1 = null;
+            while (!employeeStack.isEmpty()) {
+                employee1 = employeeStack.peek();
+                int idEmployee = Integer.parseInt(employeeStack.pop().getIdEmployee());
+                if (id == idEmployee) {
+                    check = true;
+                    break;
+                }
+            }
+            if (!check) {
+                System.out.println("id nhân viên tìm không có trong hồ sơ");
+            } else {
+                System.out.println(employee1);
+            }
+            bufferedReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void showCustomerCinema4D() {
+        Queue<Customer> customerQueue = new LinkedList<>();
+
+        List<Customer> customerList = new ArrayList<>();
+
+        try {
+            FileReader fileReader = new FileReader(FILE_CUSTOMER);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+            String[] temp;
+            Customer customer;
+            while ((line = bufferedReader.readLine()) != null) {
+                temp = line.split(COMNA);
+                customer = new Customer(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], temp[7], null);
+                customerList.add(customer);
+            }
+            customerQueue.add(customerList.get(3));
+            customerQueue.add(customerList.get(1));
+            customerQueue.add(customerList.get(4));
+            while (!customerQueue.isEmpty()) {
+                System.out.println(customerQueue.poll());
+            }
+
+            bufferedReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static void showInformationOfEmployee() {
@@ -466,7 +598,7 @@ public class MainController {
             Room room;
             while ((line = bufferedReader.readLine()) != null) {
                 temp = line.split(COMNA);
-                room = new Room(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], new FreeService(temp[6],temp[7],temp[8]));
+                room = new Room(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], new FreeService(temp[6], temp[7], temp[8]));
                 roomList.add(room);
             }
             Set<String> roomTreeSet = new TreeSet<>();
@@ -604,7 +736,7 @@ public class MainController {
             Room room;
             while ((line = bufferedReader.readLine()) != null) {
                 temp = line.split(COMNA);
-                room = new Room(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], new FreeService(temp[6],temp[7],temp[8]));
+                room = new Room(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], new FreeService(temp[6], temp[7], temp[8]));
                 roomList.add(room);
             }
             for (Room room1 : roomList) {
@@ -872,7 +1004,7 @@ public class MainController {
                     Room room;
                     while ((line = bufferedReader.readLine()) != null) {
                         temp = line.split(COMNA);
-                        room = new Room(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], new FreeService(temp[6],temp[7],temp[8]));
+                        room = new Room(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], new FreeService(temp[6], temp[7], temp[8]));
                         roomList.add(room);
                     }
                     for (int i = 0; i < roomList.size(); i++) {
