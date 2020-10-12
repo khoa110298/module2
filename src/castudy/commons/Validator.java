@@ -9,7 +9,6 @@ public class Validator {
 
     public static final String SERVICES_REGEX = "^SV(VL|HO|RO)-\\d{4}$";
     public static final String SERVICES_NAME_REGEX = "^[A-Z]{1}[a-z]*$";
-    public static final String SERVICES_RENTAL = "^([0][1-9]|[1-2][0-9]|[3][0-1])[/]([0][1-9]|[1][0-2])[/]\\d{4}$";
     public static final String CUSTOMER_NAME = "^([A-Z][a-z]*[\\s])*[A-Z][a-z]*$";
     public static final String CUSTOMER_EMAIL = "^\\w{3,}@[a-zA-Z]{3,5}\\.[a-zA-Z]{2,3}$";
     public static final String CUSTOMER_CMND = "^(\\d{3}[\\s]){2}\\d{3}$";
@@ -82,17 +81,6 @@ public class Validator {
         return check;
     }
 
-    public static boolean isValiRental(String regex) {
-        pattern = Pattern.compile(SERVICES_RENTAL);
-        matcher = pattern.matcher(regex);
-        boolean check = matcher.matches();
-        if (!check) {
-            System.out.println("nhập sai mời bạn nhập lại");
-        }
-        return check;
-
-    }
-
     public static boolean isValiNameCustomer(String regex) throws NameException {
         pattern = Pattern.compile(CUSTOMER_NAME);
         matcher = pattern.matcher(regex);
@@ -141,7 +129,7 @@ public class Validator {
             int nowYear = Calendar.getInstance().get(Calendar.YEAR);
             if (birthYear < 1900 || nowYear - birthYear < 18) {
                 check = false;
-                throw new BirthdayException();
+                throw new BirthdayException();  
             }
         } else {
             throw new BirthdayException();

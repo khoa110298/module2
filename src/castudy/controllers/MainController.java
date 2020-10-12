@@ -35,42 +35,34 @@ public class MainController {
         switch (d) {
             case 1: {
                 addNewServices();
-                displayMainMenu();
                 break;
             }
             case 2: {
                 showServices();
-                displayMainMenu();
                 break;
             }
             case 3: {
                 addNewCustomer();
-                displayMainMenu();
                 break;
             }
             case 4: {
                 showInformationCustomers();
-                displayMainMenu();
                 break;
             }
             case 5: {
                 addNewBooking();
-                displayMainMenu();
                 break;
             }
             case 6: {
                 showInformationOfEmployee();
-                displayMainMenu();
                 break;
             }
             case 7: {
                 showCustomerCinema4D();
-                displayMainMenu();
                 break;
             }
             case 8: {
                 searchEmployeeProfile();
-                displayMainMenu();
                 break;
             }
             case 9: {
@@ -517,13 +509,6 @@ public class MainController {
 
 
         Room room = new Room(id, name, area, cost, numberPeople, rental, free);
-//            System.out.print("Nhâp dịch vụ miễn phí đi kèm: ");
-//            free = scanner.nextLine();
-//            if (validator.isValiService(free)) {
-//                break;
-//            }
-//        }
-//        Room room = new Room(id, name, area, cost, numberPeople, rental, free);
         String line = room.getId() + COMNA + room.getNameServices() + COMNA + room.getArea() + COMNA + room.getCost() + COMNA
                 + room.getMaxNumber() + COMNA + room.getRentaltype() + COMNA + room.getFreeService().getNameFreeService() + COMNA
                 + room.getFreeService().getUnit() + COMNA + room.getFreeService().getPrice();
@@ -1038,7 +1023,9 @@ public class MainController {
     }
 
     public static void main(String[] args) {
-        displayMainMenu();
+        while (true){
+            displayMainMenu();
+        }
     }
 
 }
