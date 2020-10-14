@@ -1,30 +1,113 @@
 package on_tap;
 
-        import java.io.*;
-        import java.util.ArrayList;
-        import java.util.List;
-        import java.util.Scanner;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class OnTap {
+    public static final String COMNA = ",";
+
+
     public static void disPlayMenu() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("1.tìm kiếm" + "\n" + "2.sửa");
+        System.out.println("1.tìm kiếm" + "\n" + "2.sửa" + "\n" + "3.thêm" + "\n" + "4.xóa" + "\n" + "5.hiên thi");
         int d = Integer.parseInt(scanner.nextLine());
 
         switch (d) {
             case 1: {
-                updaData();
+                seach();
                 break;
             }
             case 2: {
                 capNhat();
                 break;
             }
+            case 3: {
+                addNewSinhVien();
+                break;
+            }
+            case 4: {
+                xoa();
+                break;
+            }
 
+            case 5: {
+                hienThi();
+                break;
+            }
+            default:{
+                try {
+                    throw new InputException();
+                } catch (InputException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
+
     public static List<SinhVien> sinhVienList = new ArrayList<>();
+
+
+    public static void hienThi() {
+        readFile("D:\\CodeGym\\CO320G1-NguyenKhoa\\module2\\src\\on_tap\\sinhvien.csv");
+        for (SinhVien sinhVien : sinhVienList) {
+            System.out.println(sinhVien.toString());
+        }
+    }
+
+    public static void xoa() {
+        readFile("D:\\CodeGym\\CO320G1-NguyenKhoa\\module2\\src\\on_tap\\sinhvien.csv");
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("nhập id cần xóa: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        int d = 0;
+        boolean check = false;
+        for (int i = 0; i < sinhVienList.size(); i++) {
+            if (id == Integer.parseInt(sinhVienList.get(i).getId())) {
+                check = true;
+                d = i;
+                break;
+            }
+        }
+        if (!check) {
+            System.out.println("không tìm thấy");
+        } else {
+            sinhVienList.remove(d);
+            writeFileIndex0("D:\\CodeGym\\CO320G1-NguyenKhoa\\module2\\src\\on_tap\\sinhvien.csv");
+            for (int i = 1; i < sinhVienList.size(); i++) {
+                writeFile(i, "D:\\CodeGym\\CO320G1-NguyenKhoa\\module2\\src\\on_tap\\sinhvien.csv");
+            }
+        }
+    }
+
+    public static void addNewSinhVien() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("nhập id: ");
+        String id = scanner.nextLine();
+        System.out.println("nhập tên: ");
+        String name = scanner.nextLine();
+        System.out.println("nhập tuổi: ");
+        String age = scanner.nextLine();
+        System.out.println("nhập địa chỉ: ");
+        String address = scanner.nextLine();
+
+        SinhVien sinhVien = new SinhVien(id, name, age, address);
+        String line = sinhVien.getId() + COMNA + sinhVien.getName() + COMNA + sinhVien.getAge() + COMNA + sinhVien.getAdddresss();
+
+        try {
+            FileWriter fileWriter = new FileWriter("D:\\CodeGym\\CO320G1-NguyenKhoa\\module2\\src\\on_tap\\sinhvien.csv", true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(line);
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public static void readFile(String file) {
         try {
@@ -38,9 +121,6 @@ public class OnTap {
                 sinhVien = new SinhVien(temp[0], temp[1], temp[2], temp[3]);
                 sinhVienList.add(sinhVien);
             }
-//            for (SinhVien sinhVien1:sinhVienList){
-//                System.out.println(sinhVien1);
-//            }
             bufferedReader.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -49,7 +129,7 @@ public class OnTap {
         }
     }
 
-    public static void updaData() {
+    public static void seach() {
         readFile("D:\\CodeGym\\CO320G1-NguyenKhoa\\module2\\src\\on_tap\\sinhvien.csv");
         Scanner scanner = new Scanner(System.in);
         System.out.println("nhập id cần tim kiếm: ");
@@ -68,6 +148,7 @@ public class OnTap {
         } else {
             System.out.println(sinhVienList.get(d).toString());
         }
+        sinhVienList.clear();
     }
 
     public static void writeFile(int i, String file) {
@@ -90,6 +171,7 @@ public class OnTap {
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(line);
+            bufferedWriter.newLine();
             bufferedWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -130,6 +212,8 @@ public class OnTap {
         for (int i = 1; i < sinhVienList.size(); i++) {
             writeFile(i, "D:\\CodeGym\\CO320G1-NguyenKhoa\\module2\\src\\on_tap\\sinhvien.csv");
         }
+        sinhVienList.clear();
+    }
 //        File myObij = new File("D:\\CodeGym\\CO320G1-NguyenKhoa\\module2\\src\\on_tap\\sinhvien.csv");
 //        try {
 //            myObij.delete();
@@ -142,7 +226,6 @@ public class OnTap {
 //            writeFile(i, "D:\\CodeGym\\CO320G1-NguyenKhoa\\module2\\src\\on_tap\\sinhvien.csv");
 //
 //        }
-    }
 //    public static List<SinhVien> getInfor(String file) {
 //        List<SinhVien> sinhViens = new ArrayList<>();
 //        try {
@@ -163,7 +246,7 @@ public class OnTap {
 //            e.printStackTrace();
 //        }
 //
-//        return sinhViens;
+//        return sinhViens; 
 //    }
 
 //    public static void writeFileList(List<SinhVien> sinhVienList, String file) throws IOException {
@@ -178,10 +261,8 @@ public class OnTap {
 //    }
 
     public static void main(String[] args) {
-       while (true){
-           disPlayMenu();
-       }
-
+        while (true) {
+            disPlayMenu();
+        }
     }
-
 }
