@@ -129,7 +129,7 @@ public class Validator {
             int nowYear = Calendar.getInstance().get(Calendar.YEAR);
             if (birthYear < 1900 || nowYear - birthYear < 18) {
                 check = false;
-                throw new BirthdayException();  
+                throw new BirthdayException();
             }
         } else {
             throw new BirthdayException();
@@ -137,5 +137,8 @@ public class Validator {
         return check;
     }
 
+    public static void main(String[] args) {
+        System.out.println(isValiService("massage"));
+    }
 }
 
